@@ -33,3 +33,4 @@ while (comprar != 2){
     }
 
 }
+
