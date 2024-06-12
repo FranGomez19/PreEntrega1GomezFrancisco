@@ -1,8 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box
-    ;
+    box-sizing: border-box;
 }
 
 nav img {
@@ -10,29 +9,19 @@ nav img {
     width: 80px;
 }
 
-
-   
-
-
-
-
-
-
-
-
-
-
-
-.navbar-color{
+.navbar-color {
     background-color: #b2a8a8;
+}
+
+#comprar {
+    width: 10%;
 }
 
 .titulo {
     text-align: center;
     margin: 50px;
+    margin-top: 110px;
 }
-
-
 
 .foto1 {
     height: auto;
@@ -43,21 +32,48 @@ nav img {
     margin-bottom: 20px;
 }
 
+.camisetas{
+    border: 2px solid #000;
+    margin: 2% 2% 0% 2%;
+}
+
+.camisetas h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .productos {
     align-items: center;
     display: flex;
-    border: 2px solid #000;
     justify-content: center;
     flex-wrap: wrap;
+    
 }
 
-.redes {
-    background-color: gray;
-    height: 50px;
-    text-align: center;
-    padding: 100px;
+#redes {
+    background-color: #333;
+    color: white;
+    padding: 20px 0px 10px;
+}
 
+#redes ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+#redes ul li {
+    margin: 0 10px;
+}
+
+#redes ul li a {
+    text-decoration: none;
+}
+
+#redes ul li img {
+    width: 40px;
+    height: 40px;
 }
 
 
