@@ -1,12 +1,13 @@
 class remeraDeFutbol{
-    constructor(nombre, id, precio){
+    constructor(nombre, id, precio, img){
         this.nombre = nombre;
         this.id = id;
         this.precio = parseFloat(precio)
+        this.img = img
     }
 }
 const Productos = [];
-Productos.push(new remeraDeFutbol("Remera Arsenal 2022/2023", "PROD-1001" , 60000))
+Productos.push(new remeraDeFutbol("Remera Arsenal 2022/2023", "PROD-1001" , 60000 ))
 Productos.push(new remeraDeFutbol("Remera River Plate 2019/2020", "PROD-1002" , 60000))
 Productos.push(new remeraDeFutbol("Remera Liverpool 2016/2017", "PROD-1003" , 75000))
 Productos.push(new remeraDeFutbol("Remera Ajax 2022/2023", "PROD-1004" , 50000))
@@ -23,7 +24,7 @@ Productos.push(new remeraDeFutbol("Short de Lanus", "PROD-4002" , 30000))
 Productos.push(new remeraDeFutbol("Short de River", "PROD-4003" , 30000))
 Productos.push(new remeraDeFutbol("Short de Voka", "PROD-4004" , 30000))
 
-
+let remera = document.getElementById
 function pedirRemera() {
     let idRemera = prompt("Ingrese el ID del producto:");
     let precioRemera = 0;
