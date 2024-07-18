@@ -37,7 +37,7 @@ function crearTarjetasProductosInicio(productos) {
     <h2>${producto.nombre}</h2>
     <p class="description">Id:${producto.id}.</p>
     <p class="price">$${producto.precio}</p>
-    <button class="btn" id="PROD-1001">Agregar al carrito</button>
+    <button class="btn" id="PROD-1001" type="submit">Agregar al carrito</button>
     </div>
     `
     contenedorTarjetas.appendChild(nuevaIndumentaria);
@@ -49,21 +49,40 @@ crearTarjetasProductosInicio(indumentaria);
 function agregarAlCarrito(producto) {
   const memoria = JSON.parse(localStorage.getItem("indumentaria"));
   console.log(memoria);
+  let cuenta = 0;
   if (!memoria) {
     const nuevoProducto = getNuevoProductoParaMemoria(producto);
     localStorage.setItem("indumentaria", JSON.stringify([nuevoProducto]));
+    cuenta = 1;
   } else {
     const indiceProducto = memoria.findIndex(indumentaria => indumentaria.id === producto.id);
     console.log(indiceProducto);
     const nuevaMemoria = memoria
     if (indiceProducto === -1) {
       nuevaMemoria.push(getNuevoProductoParaMemoria(producto))
+      cuenta = 1;
     } else {
       nuevaMemoria[indiceProducto].cantidad++;
+      cuenta = nuevaMemoria[indiceProducto].cantidad;
     }
     localStorage.setItem("indumentaria", JSON.stringify(nuevaMemoria));
+    
+  }
+  actualizarNumeroCarrito();
+  return cuenta;
+}
+
+function restarAlCarrito(producto) {
+  const memoria = JSON.parse(localStorage.getItem("indumentaria"));
+  const indiceProducto = memoria.findIndex(indumentaria => indumentaria.id === producto.id);
+  if (memoria[indiceProducto].cantidad === 1) {
+    memoria.splice(indiceProducto,1);
+    localStorage.setItem("indumentaria", JSON.stringify(memoria));
+  } else{
+    memoria[indiceProducto].cantidad--;
 
   }
+  localStorage.setItem("indumentaria", JSON.stringify(memoria));
   actualizarNumeroCarrito();
 }
 
@@ -73,41 +92,82 @@ function getNuevoProductoParaMemoria(producto) {
   return nuevoProducto;
 }
 const cuentaCarritoElement = document.getElementById("cuenta-carrito");
+
 function actualizarNumeroCarrito() {
   const memoria = JSON.parse(localStorage.getItem("indumentaria"));
-  const cuenta = memoria.reduce((acum, current) => acum + current.cantidad, 0)
-  cuentaCarritoElement.innerText = cuenta;
+  if (memoria && memoria.length > 0) {
+    const cuenta = memoria.reduce((acum, current) => acum + current.cantidad, 0);
+    cuentaCarritoElement.innerText = cuenta;
+  } else {
+    cuentaCarritoElement.innerText = 0;
+  }
 }
-actualizarNumeroCarrito()
+
+actualizarNumeroCarrito();
 
 const contenedorTarjetas2 = document.getElementById("contenedor-productos2");
+const unidadesElemento = document.getElementById("unidades");
+const precioElemento = document.getElementById("precio");
+const reiniciarCarritoElemento = document.getElementById("reiniciar")
 
 function crearTarjetasCompra() {
+  contenedorTarjetas2.innerHTML ="";
   const productos = JSON.parse(localStorage.getItem("indumentaria"));
   console.log(productos);
   if (productos && productos.length > 0) {
-    productos.forEach(producto => {
+    productos.forEach((producto) => {
       const nuevaIndumentaria2 = document.createElement("div");
-      nuevaIndumentaria2.classList = "producto-carrito"
+      nuevaIndumentaria2.classList = "producto-carrito";
       nuevaIndumentaria2.innerHTML = `
       <img src="${producto.img}" alt="${producto.nombre}">
-      <div>
-      <h2>${producto.nombre}</h2>
-      <p>$${producto.precio}</p>
-      </div>
-      <button>-</button>
-      <span class="cantidad">0</span>
-      <button>+</button>
-      <div>
-      </div>
-      `
+    <div>
+        <h2>${producto.nombre}</h2>
+        <em><p>$${producto.precio}</p></em>
+    </div>
+    <div class="cantidad-control">
+        <button>-</button>
+        <span class="cantidad">${producto.cantidad}</span>
+        <button>+</button>
+    </div>
+      `;
       contenedorTarjetas2.appendChild(nuevaIndumentaria2);
-      nuevaIndumentaria2.getElementsByTagName("button")[0].addEventListener("click", () => agregarAlCarrito(producto))
-
+      nuevaIndumentaria2
+          .getElementsByTagName("button")[1]
+          .addEventListener("click", (e) => {
+            const cuentaElementos = e.target.parentElement.getElementsByTagName("span")[0]
+            cuentaElementos.innerText = agregarAlCarrito(producto);
+            actualizarTotal();
+    });
+      nuevaIndumentaria2
+          .getElementsByTagName("button")[0] 
+          .addEventListener("click", () => {
+            restarAlCarrito(producto);
+            crearTarjetasCompra();
+            actualizarTotal();
+      });
     });
   }
 }
 crearTarjetasCompra();
+actualizarTotal();
 
+function actualizarTotal(){
+  const productos = JSON.parse(localStorage.getItem("indumentaria"));
+  let unidades = 0;
+  let precio = 0;
+  if (productos && productos.length>0) {
+    productos.forEach(producto =>{
+      unidades += producto.cantidad;
+      precio += producto.precio * producto.cantidad;
+    })
+    unidadesElemento.innerText = unidades;
+    precioElemento.innerText = precio;
+  }
+}
 
-
+reiniciarCarritoElemento.addEventListener("click", reiniciarCarrito)
+function reiniciarCarrito() {
+  localStorage.removeItem("indumentaria");
+  actualizarTotal();
+  crearTarjetasCompra();
+}

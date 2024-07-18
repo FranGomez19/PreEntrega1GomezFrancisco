@@ -23,7 +23,7 @@
 
         <nav class="navbar navbar-expand-lg  navbar fixed-top navbar-color">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#"><img src="./img/logo.png " alt=""></a>
+                <a class="navbar-brand" href="./index.html"><img src="./img/logo.png " alt=""></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,7 @@
                         </li> -->
                     </ul>
                     <ul>
-                        <a href="#compras" id="comprar">
+                        <a href="./pages/carrito.html" id="comprar">
                             <img src="./img/carrito.png" alt="carrito" id="carrito">
                             <span id="cuenta-carrito">0</span>
                         </a>
@@ -93,6 +93,12 @@
           <h2 id="compras-h2">TUS COMPRAS</h2>
           <div id="contenedor-productos2">
           </div>
+        </section>
+        <section id="totales">
+            <p>Cantidad de unidades: <span id="unidades">0</span></p>
+            <p>Precio final: $<span id="precio">0</span></p>
+            <button disable>Comprar</button>
+            <button id="reiniciar">Reinicar carrito</button>
         </section>
     </main>
 
