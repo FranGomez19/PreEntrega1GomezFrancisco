@@ -225,7 +225,7 @@ nav img {
 
 .cantidad-control {
     display: flex;
-    align-items: center;
+    align-items:end;
 }
 
 .cantidad-control button {
@@ -236,8 +236,13 @@ nav img {
     font-size: 18px;
     border-radius: 5px;
     cursor: pointer;
+    width: 2em;
 }
-
+.cantidad-control span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .cantidad-control button:hover {
     background-color: #004494;
 }

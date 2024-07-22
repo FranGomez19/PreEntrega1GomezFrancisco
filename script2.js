@@ -79,6 +79,8 @@ function agregarAlCarrito(producto) {
     
   }
   actualizarNumeroCarrito();
+  crearTarjetasCompra();
+  actualizarTotal();
   return cuenta;
 }
 
@@ -195,6 +197,7 @@ function reiniciarCarrito() {
     timer: 1500
   });
   localStorage.removeItem("indumentaria");
-  actualizarTotal();
   crearTarjetasCompra();
+  actualizarNumeroCarrito();
+  actualizarTotal();
 }
