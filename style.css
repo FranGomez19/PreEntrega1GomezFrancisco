@@ -249,5 +249,29 @@ nav img {
     text-align: center;
 }
 #totales{
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+    
     text-align: center;
+}
+#totales p{
+    font-size: 1.2em;
+    color: #333;
+    margin: 10px 0px;
+}
+#totales button{
+    background-color: #003366;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;;
+}
+#totales button:hover{
+    background-color: #00509e;
 }

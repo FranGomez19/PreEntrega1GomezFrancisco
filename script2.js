@@ -37,16 +37,26 @@ function crearTarjetasProductosInicio(productos) {
     <h2>${producto.nombre}</h2>
     <p class="description">Id:${producto.id}.</p>
     <p class="price">$${producto.precio}</p>
-    <button class="btn" id="PROD-1001" type="submit">Agregar al carrito</button>
+    <button class="btn" id="btn-${producto.id}" type="submit">Agregar al carrito</button>
     </div>
     `
     contenedorTarjetas.appendChild(nuevaIndumentaria);
-    nuevaIndumentaria.getElementsByTagName("button")[0].addEventListener("click", () => agregarAlCarrito(producto))
+    nuevaIndumentaria.querySelector(`#btn-${producto.id}`).addEventListener("click", () => agregarAlCarrito(producto));
   });
 }
 crearTarjetasProductosInicio(indumentaria);
 
 function agregarAlCarrito(producto) {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "bottom-end",
+    showConfirmButton: false,
+    timer: 2000,
+  });
+  Toast.fire({
+    icon: "success",
+    title: "Producto agregado exitosamente."
+  });
   const memoria = JSON.parse(localStorage.getItem("indumentaria"));
   console.log(memoria);
   let cuenta = 0;
@@ -75,6 +85,16 @@ function agregarAlCarrito(producto) {
 function restarAlCarrito(producto) {
   const memoria = JSON.parse(localStorage.getItem("indumentaria"));
   const indiceProducto = memoria.findIndex(indumentaria => indumentaria.id === producto.id);
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "bottom-end",
+    showConfirmButton: false,
+    timer: 2000,
+  });
+  Toast.fire({
+    icon: "error",
+    title: "Producto a sido eliminado del carrito."
+  });
   if (memoria[indiceProducto].cantidad === 1) {
     memoria.splice(indiceProducto,1);
     localStorage.setItem("indumentaria", JSON.stringify(memoria));
@@ -167,6 +187,13 @@ function actualizarTotal(){
 
 reiniciarCarritoElemento.addEventListener("click", reiniciarCarrito)
 function reiniciarCarrito() {
+  Swal.fire({
+    position: "center",
+    icon: "success",
+    title: "Su carrito a sido borrado en su totalidad exitosamente",
+    showConfirmButton: false,
+    timer: 1500
+  });
   localStorage.removeItem("indumentaria");
   actualizarTotal();
   crearTarjetasCompra();
