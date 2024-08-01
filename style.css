@@ -280,3 +280,18 @@ nav img {
 #totales button:hover{
     background-color: #00509e;
 }
+.pokemon-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    width: 150px;
+    height: 200px;
+    display: inline-block;
+    background-color: rgb(255, 190, 70);
+}
+
+.pokemon-card img {
+    width: 100px;
+    height: 100px;
+}

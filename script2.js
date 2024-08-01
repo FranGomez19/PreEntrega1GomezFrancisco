@@ -201,3 +201,7 @@ function reiniciarCarrito() {
   actualizarNumeroCarrito();
   actualizarTotal();
 }
+document.addEventListener('click', () => {
+  document.getElementById('get-cat-fact').addEventListener('click', fetchCatFact);
+});
+
